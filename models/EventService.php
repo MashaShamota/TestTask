@@ -4,21 +4,53 @@ require_once './helpers/SQLQueries.php';
 
 class EventService
 {
+    /**
+     * Property: format
+     * GET-response format, defaul jason
+     */
     public $format = 'json';
+
+    /**
+     * Property: event
+     * Type of event
+     */
     public $event;
+
+    /**
+     * Property: country
+     * Country code
+     */
     public $country;
+
+    /**
+     * Property: topCount
+     * Number of top countries for selection
+     */
     public $topCount = 5;
 
+    /**
+     * Property: allowedFormats
+     * Declaration of available formats for GET request results
+     */
     protected $allowedFormats = [
         'json',
         'csv'
     ];
+
+    /**
+     * Property: eventTypes
+     * Declaration of available event types
+     */
     protected $eventTypes = [
         'click',
         'view',
         'play'
     ];
 
+    /**
+     * Property: dbh
+     * Database Handle
+     */
     private $dbh;
 
     /**
@@ -49,7 +81,6 @@ class EventService
 
         return $stats;
     }
-
 
     /**
      * @param $params

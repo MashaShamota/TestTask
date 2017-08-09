@@ -3,6 +3,13 @@
 class ResponseHelper
 {
 
+    /**
+     * Prepare response results in requested format
+     * @param $data
+     * @param $format
+     * @return array|bool|resource|string
+     * TODO: Create separate functions for array restructuring for different formats
+     */
     public static function formatGetResponse($data, $format)
     {
         $output = array();
@@ -12,8 +19,7 @@ class ResponseHelper
                 $output = fopen('php://output', 'w');
                 fputcsv($output, array('Country', 'Event', 'Total'));
                 foreach ($data as $row) {
-                    fputcsv($output,
-                        array($row['country'], $row['action'], $row['total']));
+                    fputcsv($output, array($row['country'], $row['action'], $row['total']));
                 }
                 break;
             case 'json':
@@ -30,6 +36,11 @@ class ResponseHelper
         return $output;
     }
 
+    /**
+     * Set http status code
+     * @param $result
+     * @return bool only status
+     */
     public static function formatPostResponse($result)
     {
         if ($result) {
@@ -40,6 +51,11 @@ class ResponseHelper
         }
     }
 
+    /**
+     * Basic handler for exceptions
+     * @param $message
+     * @return json string
+     */
     public static function formatError($message)
     {
         return json_encode(['error' => $message]);

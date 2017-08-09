@@ -3,14 +3,20 @@
 require_once './models/EventService.php';
 require_once './helpers/RequestHelper.php';
 
-class Controller
+class EventController
 {
-
+    /**
+     * Property: service
+     * The service instance
+     */
     private $service;
 
+    /**
+     * Controller constructor. Service initialisation.
+     */
     public function __construct()
     {
-        $this->service = new Service();
+        $this->service = new EventService();
     }
 
     /**
@@ -31,6 +37,10 @@ class Controller
         return ResponseHelper::formatGetResponse($data, $this->service->format);
     }
 
+    /**
+     * @param array $params with event type and country
+     * @return bool status
+     */
     public function updateEventCounter($params)
     {
         $params = RequestHelper::cleanInputs($params);

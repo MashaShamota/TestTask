@@ -2,6 +2,11 @@
 
 class RequestHelper
 {
+    /**
+     * Remove html tags
+     * @param $data
+     * @return array|string with cleaned parameters
+     */
     public static function cleanInputs($data)
     {
         $clean_input = [];

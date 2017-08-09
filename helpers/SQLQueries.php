@@ -2,6 +2,10 @@
 
 class SQLQueries
 {
+    /**
+     * @param $count amount of top countries
+     * @return string sql query for selecting top countries
+     */
     public static function getSelectTopCountriesQuery($count)
     {
         return '
@@ -14,6 +18,10 @@ class SQLQueries
       LIMIT ' . $count;
     }
 
+    /**
+     * @param array $countries list of top countries
+     * @return string sql query for selecting statistics
+     */
     public static function getSelectStatistics(array $countries)
     {
         array_walk($countries, function (&$val) {
@@ -30,6 +38,9 @@ class SQLQueries
         GROUP BY country,action';
     }
 
+    /**
+     * @return string  sql query for updating event counter
+     */
     public static function getUpdateCounterQuery()
     {
         return '
@@ -40,6 +51,9 @@ class SQLQueries
       AND DATE(`date`) = :date';
     }
 
+    /**
+     * @return string sql query for inserting new record
+     */
     public static function getInsertEventQuery()
     {
         return '

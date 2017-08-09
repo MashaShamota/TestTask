@@ -1,30 +1,30 @@
 <?php
+require './configs/configs.php';
 
 class Database
 {
+    /**
+     * Property: connection
+     * DB connection
+     */
     private $connection;
+
+    /**
+     * Property: $instance
+     * DB instance
+     */
     private static $instance;
 
-    //TODO put data to config file
-    private $host = "127.0.0.1";
-    private $username = "root";
-    private $password = "";
-    private $database = "testDB";
 
-    /*
-    Get an instance of the Database
-    @return Instance
-    */
-    public static function getInstance()
-    {
-        if (!self::$instance) { // If no instance then make one
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+    private $host = DB_HOST;
+    private $username = DB_USER;
+    private $password = DB_PASSWORD;
+    private $database = DB_NAME;
 
-    // Constructor
-    private function __construct()
+    /**
+     * Database constructor.
+     */
+    public function __construct()
     {
         try {
             $this->connection = new \PDO("mysql:host=$this->host;dbname=$this->database", $this->username, $this->password);
@@ -33,7 +33,21 @@ class Database
         }
     }
 
-    // Return mysql pdo connection
+    /**
+     * Get an instance of database
+     * @return Database
+     */
+    public static function getInstance()
+    {
+        if (!self::$instance) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    /**
+     * @return PDO connection
+     */
     public function getConnection()
     {
         return $this->connection;
